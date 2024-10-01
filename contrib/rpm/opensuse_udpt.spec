@@ -23,8 +23,8 @@ Summary:        A lightweight UDP torrent tracker
 License:        MIT
 URL:            https://github.com/naim94a/udpt
 Source0:        udpt-3.1.2.tar.zst
-Source2:        vendor.tar.zst
-Source1:        contrib.tar.zst
+Source1:        vendor.tar.zst
+Source2:        contrib.tar.zst
 BuildRequires:  cargo-packaging
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  sysuser-tools
@@ -36,7 +36,8 @@ Provides:       user(udpt)
 UDPT is a lightweight torrent tracker that uses the UDP protocol for tracking and fully implements BEP-15. This project was developed with security & simplicity in mind, so it shouldn't be difficult to get a server started.
 
 %prep
-%autosetup -a1 -a2 -a3
+%setup -qa1 -qa2
+#%%autosetup -a2 -a1
 
 %build
 %{cargo_build}
@@ -51,12 +52,13 @@ install -Dm 644  contrib/systemd/udpt.conf %{buildroot}%{_sysconfdir}/udpt.conf
 %files
 %license LICENSE
 %doc README.md
+%config(noreplace) %{_sysconfdir}/udpt.conf
 %{_bindir}/udpt
 %{_unitdir}/udpt.service
 %{_tmpfilesdir}/udpt.conf
 %{_sysusersdir}/system-user-udpt.conf
 
-%pre -f udpt.pre
+%pre
 %service_add_pre udpt.service
 
 %post
@@ -71,4 +73,3 @@ install -Dm 644  contrib/systemd/udpt.conf %{buildroot}%{_sysconfdir}/udpt.conf
 %service_del_postun udpt.service
 
 %changelog
-
