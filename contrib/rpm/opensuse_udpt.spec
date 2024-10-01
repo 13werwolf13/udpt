@@ -42,6 +42,9 @@ UDPT is a lightweight torrent tracker that uses the UDP protocol for tracking an
 %build
 %{cargo_build}
 
+%check
+cargo test --offline --verbose
+
 %install
 install -Dm 755  target/release/udpt-rs %{buildroot}%{_bindir}/udpt
 install -Dm 644  contrib/systemd/udpt.service %{buildroot}%{_unitdir}/udpt.service
