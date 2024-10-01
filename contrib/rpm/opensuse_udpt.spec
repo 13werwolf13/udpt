@@ -51,7 +51,7 @@ install -Dm 644  contrib/systemd/udpt.conf %{buildroot}%{_sysconfdir}/udpt.conf
 
 %files
 %license LICENSE
-%doc README.md
+%doc README.md docs/src/config.md docs/src/tracking_modes.md docs/src/api.md
 %config(noreplace) %{_sysconfdir}/udpt.conf
 %{_bindir}/udpt
 %{_unitdir}/udpt.service
