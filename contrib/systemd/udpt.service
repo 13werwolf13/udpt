@@ -1,0 +1,27 @@
+[Unit]
+Description=UDPT is a lightweight torrent tracker
+Wants=network-online.target
+After=multi-user.target network.target network-online.target
+
+[Service]
+Type=simple
+User=udpt
+Group=udpt
+WorkingDirectory=/var/lib/udpt
+ExecStart=/usr/bin/udpt -c /etc/udpt.conf
+Restart=always
+RestartSec=30
+TimeoutStartSec=300
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectSystem=strict
+ProtectHome=read-only
+SystemCallFilter=~@mount
+ReadWritePaths=/var/lib/udpt
+
+[Install]
+WantedBy=multi-user.target
