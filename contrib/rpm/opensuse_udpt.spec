@@ -36,7 +36,7 @@ Provides:       user(udpt)
 UDPT is a lightweight torrent tracker that uses the UDP protocol for tracking and fully implements BEP-15. This project was developed with security & simplicity in mind, so it shouldn't be difficult to get a server started.
 
 %prep
-%autosetup -a1
+%autosetup -a1 -a2 -a3
 
 %build
 %{cargo_build}
